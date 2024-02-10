@@ -3,9 +3,11 @@
 Some gyms require you to install the Sportivity app in order to enter the gym. I feel that it is a sad
 reflection on modern society that you need to install a properietary app in order to enter your gym for
 one of the most basic human needs (getting exercise). I therefore tried to reverse engineer the app and
-found out that you can login using the API.
+found out that you can enter the door by using the API.
 
-Of course, you still need a Sportivity account and a gym membership to enter your gym.
+Of course, you still need a Sportivity account and a gym membership to enter your gym. But if you
+run the script on your phone, the door will unlock and does not require you to use the Sportivity
+app anymore.
 
 ## Requirements
 
