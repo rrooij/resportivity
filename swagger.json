@@ -1,0 +1,4447 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SportivityAppV3",
+    "version": "1.0.0"
+  },
+  "host": "bossnl.mendixcloud.com",
+  "basePath": "/SportivityAppV3",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/AccessQR/Access": {
+      "post": {
+        "tags": [
+          "AccessQR"
+        ],
+        "summary": "Gate access with QR code",
+        "description": "Use this call to check if user has access with QR code.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/QRData"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "file"
+            }
+          }
+        }
+      }
+    },
+    "/RegisterQR": {
+      "post": {
+        "tags": [
+          "RegisterQR"
+        ],
+        "summary": "Register phone for using QR access",
+        "description": "This call is used to register the users phone for QR access.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/QRData"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "file"
+            }
+          }
+        }
+      }
+    },
+    "/UserContent": {
+      "get": {
+        "tags": [
+          "UserContent"
+        ],
+        "summary": "Getting the user content",
+        "description": "This call is used to retrieve the customers data.",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "LocationId",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "PhoneId",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "FirstLogin",
+            "in": "query",
+            "type": "boolean",
+            "default": "false"
+          },
+          {
+            "name": "PhotoDate",
+            "in": "query",
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AppResponse",
+              "xml": {
+                "name": "Responses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/UserContent/SetUserContent": {
+      "post": {
+        "tags": [
+          "UserContent"
+        ],
+        "summary": "Change customer data",
+        "description": "This call is used to change the customer data.",
+        "parameters": [
+          {
+            "name": "Request",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AppRequest"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AppResponse",
+              "xml": {
+                "name": "Responses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/UserContent/CustomerMemberships": {
+      "get": {
+        "tags": [
+          "UserContent"
+        ],
+        "summary": "Get the membeships of customer",
+        "description": "This call is used to retrieve the customers memberships.",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "LocationId",
+            "in": "query",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/MembershipResponse",
+              "xml": {
+                "name": "MembershipResponses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/UserContent/Countries": {
+      "get": {
+        "tags": [
+          "UserContent"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "LocationId",
+            "in": "query",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AppResponse_2",
+              "xml": {
+                "name": "Responses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/UserContent/AdressValid": {
+      "get": {
+        "tags": [
+          "UserContent"
+        ],
+        "parameters": [
+          {
+            "name": "ZipCode",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "HouseNumber",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "LocationId",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "Addition",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AddressResponse",
+              "xml": {
+                "name": "AddressResponses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/UserContent/Test": {
+      "get": {
+        "tags": [
+          "UserContent"
+        ],
+        "parameters": [
+          {
+            "name": "Description",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "Valid",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "file"
+            }
+          }
+        }
+      }
+    },
+    "/UserContent/Language": {
+      "post": {
+        "tags": [
+          "UserContent"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "Request",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/LanguageRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AppResponse_2_3",
+              "xml": {
+                "name": "Responses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AddOn/TurnOnOff": {
+      "post": {
+        "tags": [
+          "AddOn"
+        ],
+        "summary": "Turning addons on and off",
+        "description": "This call is used to turn addons on and off.",
+        "parameters": [
+          {
+            "name": "Request",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AppRequest_2"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AddonOnOffRequestResponse",
+              "xml": {
+                "name": "AddonOnOffRequestResponses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AddOn/TurnOnOffConfirmation": {
+      "post": {
+        "tags": [
+          "AddOn"
+        ],
+        "summary": "Confirm turning the addon on or off",
+        "description": "This call is used to confirm turning the addon on or off.",
+        "parameters": [
+          {
+            "name": "Request",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AppRequest_2"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AddonOnConfirmation",
+              "xml": {
+                "name": "AddonOnConfirmations"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AddOn/MembershipAddon": {
+      "get": {
+        "tags": [
+          "AddOn"
+        ],
+        "summary": "Get the addons of a membership",
+        "description": "This call is used to retrieve all addons of a membership.",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "MembershipId",
+            "in": "query",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AddOnResponse",
+              "xml": {
+                "name": "AddOnResponses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AddOn/CustomerAddons": {
+      "get": {
+        "tags": [
+          "AddOn"
+        ],
+        "summary": "Get customers addons",
+        "description": "This call is used to retrieve all addons of a customer.",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "LocationId",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "OnlyOff",
+            "in": "query",
+            "type": "boolean",
+            "default": "false"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AddOnResponse"
+            }
+          }
+        }
+      }
+    },
+    "/PhoneId/RegisterPhoneId": {
+      "post": {
+        "tags": [
+          "PhoneId"
+        ],
+        "summary": "Register a phoneId",
+        "description": "This call is used to register a phoneId.",
+        "parameters": [
+          {
+            "name": "Request",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/PhoneIdRequest"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AppResponse_2_3",
+              "xml": {
+                "name": "Responses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Lesson/LikeLesson": {
+      "post": {
+        "tags": [
+          "Lesson"
+        ],
+        "summary": "Like a lesson",
+        "description": "This call is used to like a lesson for the customer.",
+        "parameters": [
+          {
+            "name": "Request",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/RequestLikeLesson"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/LikeLessonResponse",
+              "xml": {
+                "name": "LikeLessonResponses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Lesson/JoinLesson": {
+      "post": {
+        "tags": [
+          "Lesson"
+        ],
+        "summary": "Join a lesson",
+        "description": "This call is used to join a lesson by setting the reservation.",
+        "parameters": [
+          {
+            "name": "Request",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/JoinLessonRequest"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/JoinLessonResponse",
+              "xml": {
+                "name": "JoinLessonResponses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Lesson/GetLikedLessons": {
+      "get": {
+        "tags": [
+          "Lesson"
+        ],
+        "summary": "Get the liked lessons of the customer",
+        "description": "This call is used to retrieve the liked lessons of a customer.",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "LocationId",
+            "in": "query",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/LessonResponse",
+              "xml": {
+                "name": "LessonResponses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Lesson/GetIds": {
+      "get": {
+        "tags": [
+          "Lesson"
+        ],
+        "summary": "Get the id's of lessons",
+        "description": "This call is used to retrieve the id's of lessons",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "LocationId",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "StartDate",
+            "in": "query",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "EndDate",
+            "in": "query",
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/LessonResponse",
+              "xml": {
+                "name": "LessonResponses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Lesson/LessonById": {
+      "get": {
+        "tags": [
+          "Lesson"
+        ],
+        "summary": "Get a lessons by the id",
+        "description": "This call is used to retrieve the lessons by id",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "LessonId",
+            "in": "query",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/LessonByIdResponse",
+              "xml": {
+                "name": "LessonByIdResponses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Lesson/GetCustomerLessons": {
+      "get": {
+        "tags": [
+          "Lesson"
+        ],
+        "summary": "Get the lessons of a customer",
+        "description": "This call is used to retrieve the lessons of a customer.",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "LocationId",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "StartDate",
+            "in": "query",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "EndDate",
+            "in": "query",
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/LessonResponse_2",
+              "xml": {
+                "name": "LessonResponses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Lesson/CancelLessonRequest": {
+      "post": {
+        "tags": [
+          "Lesson"
+        ],
+        "summary": "Cancel a lesson booking",
+        "description": "This call is used to cancel a lesson booking.",
+        "parameters": [
+          {
+            "name": "Request",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/JoinLessonRequest"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/CancellLessonResponse",
+              "xml": {
+                "name": "CancellLessonResponses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Payment/GetLink": {
+      "get": {
+        "tags": [
+          "Payment"
+        ],
+        "summary": "Get a payment link",
+        "description": "This call is used to get a payment link.",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "DeviceType",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "LocationId",
+            "in": "query",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/SisowResponse",
+              "xml": {
+                "name": "SisowResponses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Payment/GetCreditLink": {
+      "get": {
+        "tags": [
+          "Payment"
+        ],
+        "summary": "Get a credit link",
+        "description": "This call is used to get a credit payment link.",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "LocationId",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "DeviceType",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "Amount",
+            "in": "query",
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/SisowResponse",
+              "xml": {
+                "name": "SisowResponses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Payment/GetCreditLinkSportCredit": {
+      "get": {
+        "tags": [
+          "Payment"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "LocationId",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "Amount",
+            "in": "query",
+            "type": "number"
+          },
+          {
+            "name": "DeviceType",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/SisowResponse",
+              "xml": {
+                "name": "SisowResponses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Location/LogoLocation": {
+      "post": {
+        "tags": [
+          "Location"
+        ],
+        "summary": "Get the logo of a location.",
+        "description": "This call is used to retrieve the logo of a location.\r\n\r\nNote: The boolean 'IsCallNaar2eOmgeving' should be false or empty!",
+        "parameters": [
+          {
+            "name": "Request",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AppRequest_2_3"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "BundleIdentifier",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/LogoResponse",
+              "xml": {
+                "name": "LogoResponses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Location/GetLocationsOfCompany": {
+      "get": {
+        "tags": [
+          "Location"
+        ],
+        "summary": "Get the locations of a company",
+        "description": "This call is used to get the locations of a company.",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "LocationId",
+            "in": "query",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/LocationResponse",
+              "xml": {
+                "name": "LocationResponses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Invoices/GetInvoices": {
+      "get": {
+        "tags": [
+          "Invoices"
+        ],
+        "summary": "Get the invoices of a customer",
+        "description": "This call is used to retrieve the invoices of a customer",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "LocationId",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "BooleanDefaultFalse",
+            "in": "query",
+            "type": "boolean",
+            "default": "false"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/InvoiceResponse",
+              "xml": {
+                "name": "InvoiceResponses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Invoices/GetInvoicePDF": {
+      "get": {
+        "tags": [
+          "Invoices"
+        ],
+        "summary": "Get the PDF file of an invoice",
+        "description": "This call is used to retrieve the PDF file of an invoice",
+        "parameters": [
+          {
+            "name": "InvoiceId",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/InvoicePDFResponse",
+              "xml": {
+                "name": "InvoicePDFResponses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Credits/GetCreditOptions": {
+      "get": {
+        "tags": [
+          "Credits"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "LocationId",
+            "in": "query",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/CreditOptionsResponse",
+              "xml": {
+                "name": "CreditOptionsResponses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ChangeMembership/Freeze": {
+      "post": {
+        "tags": [
+          "ChangeMembership"
+        ],
+        "summary": "Request a freeze on membership",
+        "description": "This call is used to send an email to the club to request the freeze of a membership.",
+        "parameters": [
+          {
+            "name": "Request",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AppRequest_2_3_4"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/EmailResponse",
+              "xml": {
+                "name": "EmailResponses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ChangeMembership/Cancel": {
+      "post": {
+        "tags": [
+          "ChangeMembership"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "Request",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AppRequest_2_3_4_5"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/EmailResponse",
+              "xml": {
+                "name": "EmailResponses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ChangeMembership/CancellationReasons": {
+      "get": {
+        "tags": [
+          "ChangeMembership"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "LocationId",
+            "in": "query",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AppResponse_2_3_4",
+              "xml": {
+                "name": "Responses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ForgotPassword": {
+      "post": {
+        "tags": [
+          "ForgotPassword"
+        ],
+        "summary": "Forgot password",
+        "description": "This call is used to send a reset password email to the customer.",
+        "parameters": [
+          {
+            "name": "Request",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/FPUser"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "BundleIdentifier",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/FPResponse",
+              "xml": {
+                "name": "FPResponses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Login": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
+        "summary": "Login",
+        "description": "This call is used to request a login.\r\n\r\nNote: The boolean 'IsCallNaar2eOmgeving' should be false or empty!",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AppRequest_2_3_4_5_6"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/LoginResponse",
+              "xml": {
+                "name": "LoginResponses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/HTML/ContactInformation": {
+      "get": {
+        "tags": [
+          "HTML"
+        ],
+        "summary": "Get the contact information",
+        "description": "This call is used to retrieve the contact information of a location.",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "LocationId",
+            "in": "query",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/HTML",
+              "xml": {
+                "name": "HTMLResponses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/HTML/Requirements": {
+      "get": {
+        "tags": [
+          "HTML"
+        ],
+        "summary": "Get the requirements",
+        "description": "This call is used to retrieve the requirements of a location.",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "LocationId",
+            "in": "query",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/HTML",
+              "xml": {
+                "name": "HTMLResponses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/MembershipDefinition/MembershipDefinitions": {
+      "get": {
+        "tags": [
+          "MembershipDefinition"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "LocationId",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "Language",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AppResponse_2_3_4_5",
+              "xml": {
+                "name": "Responses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/MembershipDefinition/FirstCosts": {
+      "get": {
+        "tags": [
+          "MembershipDefinition"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "LocationId",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "Language",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "MembershipDefinitionId",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "StartDate",
+            "in": "query",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "IsAction",
+            "in": "query",
+            "type": "boolean",
+            "default": "false"
+          },
+          {
+            "name": "UseNoDeposits",
+            "in": "query",
+            "type": "boolean",
+            "default": "false"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/FirstCostsResponse",
+              "xml": {
+                "name": "FirstCostsResponses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/MembershipDefinition/Addons": {
+      "get": {
+        "tags": [
+          "MembershipDefinition"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "LocationId",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "Language",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "MembershipDefinitionId",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "StartDate",
+            "in": "query",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "Promotion",
+            "in": "query",
+            "type": "boolean",
+            "default": "false"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AddOnResponse_2",
+              "xml": {
+                "name": "AddOnResponses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/MembershipDefinition/Conditions": {
+      "get": {
+        "tags": [
+          "MembershipDefinition"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "LocationId",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "Language",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "MembershipDefinitionId",
+            "in": "query",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ConditionsResponse",
+              "xml": {
+                "name": "ConditionsResponses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/MembershipDefinition/ConditionByType": {
+      "get": {
+        "tags": [
+          "MembershipDefinition"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "LocationId",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "Language",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "ConditionType",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ConditionsResponse_2",
+              "xml": {
+                "name": "ConditionsResponses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/MembershipDefinition/IBANCheck": {
+      "get": {
+        "tags": [
+          "MembershipDefinition"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "LocationId",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "Language",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "AccountNumber",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ConditionsResponse_2_3",
+              "xml": {
+                "name": "ConditionsResponses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/MembershipDefinition/Membership": {
+      "post": {
+        "tags": [
+          "MembershipDefinition"
+        ],
+        "parameters": [
+          {
+            "name": "NewMembership",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/NewMembershipRequest"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AppResponse_2_3_4_5_6",
+              "xml": {
+                "name": "Responses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/MembershipDefinition/Upgrade": {
+      "get": {
+        "tags": [
+          "MembershipDefinition"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "LocationId",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "Language",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "MembershipId",
+            "in": "query",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AppResponse_2_3_4_5",
+              "xml": {
+                "name": "Responses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/MembershipDefinition/Convert": {
+      "post": {
+        "tags": [
+          "MembershipDefinition"
+        ],
+        "parameters": [
+          {
+            "name": "NewMembership",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/NewMembershipRequest"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AppResponse_2_3_4_5_6",
+              "xml": {
+                "name": "Responses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/News": {
+      "get": {
+        "tags": [
+          "News"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "LocationId",
+            "in": "query",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/NewsResponse",
+              "xml": {
+                "name": "NewsResponses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/OptIn": {
+      "get": {
+        "tags": [
+          "OptIn"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "LocationId",
+            "in": "query",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/OptInResponse",
+              "xml": {
+                "name": "OptInResponses"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "OptIn"
+        ],
+        "parameters": [
+          {
+            "name": "OptinRequest",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/OptinRequest"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AppResponse_2_3",
+              "xml": {
+                "name": "Responses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/TogetherEntrance": {
+      "get": {
+        "tags": [
+          "TogetherEntrance"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "LocationId",
+            "in": "query",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/TogetherEntranceResponse",
+              "xml": {
+                "name": "TogetherEntranceResponses"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "TogetherEntrance"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "TogetherEntranceApp",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TogetherEntranceApp_2"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/TogetherEntranceApp",
+              "xml": {
+                "name": "TogetherEntranceApps"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/TogetherEntrance/CheckMembership": {
+      "get": {
+        "tags": [
+          "TogetherEntrance"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "LocationId",
+            "in": "query",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/TogetherEntranceResponse",
+              "xml": {
+                "name": "TogetherEntranceResponses"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Button": {
+      "get": {
+        "tags": [
+          "Button"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "LocationId",
+            "in": "query",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ButtonsResponse",
+              "xml": {
+                "name": "ButtonsResponses"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AppResponse": {
+      "title": "Response",
+      "xml": {
+        "name": "Response"
+      },
+      "type": "object",
+      "properties": {
+        "Response": {
+          "type": "string"
+        },
+        "Companys": {
+          "type": "array",
+          "items": {
+            "title": "Company",
+            "xml": {
+              "name": "Company"
+            },
+            "type": "object",
+            "properties": {
+              "Name": {
+                "type": "string"
+              },
+              "Longitude": {
+                "type": "number"
+              },
+              "Latitude": {
+                "type": "number"
+              },
+              "BackgroundColor": {
+                "type": "string"
+              },
+              "ButtonColor": {
+                "type": "string"
+              },
+              "IconColor": {
+                "type": "string"
+              },
+              "TextColorPrimary": {
+                "type": "string"
+              },
+              "TextColorSecondary": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "Customer": {
+          "title": "",
+          "type": "object",
+          "properties": {
+            "FullName": {
+              "type": "string"
+            },
+            "FirstName": {
+              "type": "string"
+            },
+            "MiddleName": {
+              "type": "string"
+            },
+            "LastName": {
+              "type": "string"
+            },
+            "Birthday": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "Address": {
+              "type": "string"
+            },
+            "HouseNumber": {
+              "type": "string"
+            },
+            "Addition": {
+              "type": "string"
+            },
+            "ZipCode": {
+              "type": "string"
+            },
+            "City": {
+              "type": "string"
+            },
+            "Country": {
+              "type": "string",
+              "enum": [
+                "Belgie",
+                "Deutschland",
+                "France",
+                "Nederland",
+                "South_Africa",
+                "Swiss",
+                "Singapore",
+                "Hongkong",
+                "Austria",
+                "Sweden",
+                "USA",
+                "Japan",
+                "Kenia",
+                "Noorwegen",
+                "Portugal",
+                "UK",
+                "Curacao",
+                "Macau",
+                "Polen",
+                "Spanje",
+                "Denemarken",
+                "Finland",
+                "Italy",
+                "UAE",
+                "Bonaire"
+              ]
+            },
+            "District": {
+              "type": "string"
+            },
+            "Language": {
+              "type": "string",
+              "enum": [
+                "nl_NL",
+                "en_GB",
+                "pl_PL",
+                "de_DE",
+                "es_ES",
+                "it_IT",
+                "dk_DK"
+              ]
+            },
+            "Email": {
+              "type": "string"
+            },
+            "Phone": {
+              "type": "string"
+            },
+            "PhoneMobile": {
+              "type": "string"
+            },
+            "MembershipExperationWarning": {
+              "type": "string",
+              "enum": [
+                "None",
+                "Low",
+                "Medium",
+                "High",
+                "Critical"
+              ]
+            },
+            "Subscriptions": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "Lessons": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "NumberOfInvoices": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "MultipleCompanies": {
+              "type": "boolean"
+            },
+            "Saldo": {
+              "type": "string"
+            },
+            "SportscreditsBool": {
+              "type": "boolean"
+            },
+            "Sportscredits": {
+              "type": "string"
+            },
+            "AlertMore": {
+              "type": "boolean"
+            },
+            "SamePhoneId": {
+              "type": "boolean"
+            },
+            "PhoneIdSwapRequested": {
+              "type": "boolean"
+            },
+            "AccountNumber": {
+              "type": "string"
+            },
+            "BIC": {
+              "type": "string"
+            }
+          }
+        },
+        "Photo": {
+          "title": "",
+          "type": "object",
+          "properties": {
+            "HasContents": {
+              "type": "boolean"
+            },
+            "FileID": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "Name": {
+              "type": "string"
+            },
+            "PublicThumbnailPath": {
+              "type": "string"
+            },
+            "PhotoDate": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "createdDate": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        },
+        "CompanyPhotos": {
+          "type": "array",
+          "items": {
+            "title": "CompanyPhoto",
+            "xml": {
+              "name": "CompanyPhoto"
+            },
+            "type": "object",
+            "properties": {
+              "Photo": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "LessonIdsLists": {
+          "type": "array",
+          "items": {
+            "title": "LessonIdsList",
+            "xml": {
+              "name": "LessonIdsList"
+            },
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "_id_jsonkey": {
+                "type": "string"
+              },
+              "Description": {
+                "type": "string"
+              },
+              "BookingStatus": {
+                "type": "string",
+                "enum": [
+                  "Gereserveerd",
+                  "Afgemeld_door_klant",
+                  "Afgemeld",
+                  "Niet_verschenen",
+                  "Aangemeld",
+                  "Reservering_vast",
+                  "Waitinglist",
+                  "Geen"
+                ]
+              },
+              "ThirdPartyId": {
+                "type": "string"
+              },
+              "LikedLesson": {
+                "type": "boolean"
+              },
+              "LocationName": {
+                "type": "string"
+              },
+              "SpotsInt": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "MaximumParticipants": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "LessonColor": {
+                "type": "string"
+              },
+              "LessonStartTime": {
+                "type": "string"
+              },
+              "LessonEndTime": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "News": {
+          "title": "",
+          "type": "object",
+          "properties": {
+            "Title": {
+              "type": "string"
+            },
+            "Description": {
+              "type": "string"
+            },
+            "HTML": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "MembershipResponse": {
+      "title": "MembershipResponse",
+      "xml": {
+        "name": "MembershipResponse"
+      },
+      "type": "object",
+      "properties": {
+        "Response": {
+          "type": "string"
+        },
+        "TotalNumberOfMemberships": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Memberships": {
+          "type": "array",
+          "items": {
+            "title": "Membership",
+            "xml": {
+              "name": "Membership"
+            },
+            "type": "object",
+            "properties": {
+              "StartDate": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "PaymentEndDate": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "ContractEndDate": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "Amount": {
+                "type": "number"
+              },
+              "LastVisit": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "MembershipActive": {
+                "type": "boolean"
+              },
+              "CancelledPerDate": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "CancelledAtDate": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "FinalDate": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "AccessEndDate": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "NumberOfVisitsLeft": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "Blocked": {
+                "type": "boolean"
+              },
+              "Terminated": {
+                "type": "boolean"
+              },
+              "MembershipID": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "ActiveBlockages": {
+                "type": "boolean"
+              },
+              "ShowDeposit": {
+                "type": "boolean"
+              },
+              "UnlimitedVisits": {
+                "type": "boolean"
+              },
+              "Description": {
+                "type": "string"
+              },
+              "LocationId": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "LocationName": {
+                "type": "string"
+              },
+              "AmountAsString": {
+                "type": "string"
+              },
+              "changedDate": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "createdDate": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "Future": {
+                "type": "boolean"
+              },
+              "OnlyOnce": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    },
+    "AppResponse_2": {
+      "title": "Response",
+      "xml": {
+        "name": "Response"
+      },
+      "type": "object",
+      "properties": {
+        "Response": {
+          "type": "string"
+        },
+        "Countries": {
+          "type": "array",
+          "items": {
+            "title": "Country",
+            "xml": {
+              "name": "Country"
+            },
+            "type": "object",
+            "properties": {
+              "Name": {
+                "type": "string",
+                "enum": [
+                  "Belgie",
+                  "Deutschland",
+                  "France",
+                  "Nederland",
+                  "South_Africa",
+                  "Swiss",
+                  "Singapore",
+                  "Hongkong",
+                  "Austria",
+                  "Sweden",
+                  "USA",
+                  "Japan",
+                  "Kenia",
+                  "Noorwegen",
+                  "Portugal",
+                  "UK",
+                  "Curacao",
+                  "Macau",
+                  "Polen",
+                  "Spanje",
+                  "Denemarken",
+                  "Finland",
+                  "Italy",
+                  "UAE",
+                  "Bonaire"
+                ]
+              },
+              "AutomaticAdress": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    },
+    "AddressResponse": {
+      "title": "AddressResponse",
+      "xml": {
+        "name": "AddressResponse"
+      },
+      "type": "object",
+      "properties": {
+        "Address": {
+          "type": "string"
+        },
+        "Housenumber": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Addition": {
+          "type": "string"
+        },
+        "Zipcode": {
+          "type": "string"
+        },
+        "City": {
+          "type": "string"
+        },
+        "Response": {
+          "type": "string"
+        }
+      }
+    },
+    "AppResponse_2_3": {
+      "title": "Response",
+      "xml": {
+        "name": "Response"
+      },
+      "type": "object",
+      "properties": {
+        "Response": {
+          "type": "string"
+        },
+        "Companys": {
+          "type": "array",
+          "items": {
+            "title": "Company",
+            "xml": {
+              "name": "Company"
+            },
+            "type": "object",
+            "properties": {
+              "Name": {
+                "type": "string"
+              },
+              "Longitude": {
+                "type": "number"
+              },
+              "Latitude": {
+                "type": "number"
+              },
+              "BackgroundColor": {
+                "type": "string"
+              },
+              "ButtonColor": {
+                "type": "string"
+              },
+              "IconColor": {
+                "type": "string"
+              },
+              "TextColorPrimary": {
+                "type": "string"
+              },
+              "TextColorSecondary": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "Customer": {
+          "title": "",
+          "type": "object",
+          "properties": {
+            "FullName": {
+              "type": "string"
+            },
+            "FirstName": {
+              "type": "string"
+            },
+            "MiddleName": {
+              "type": "string"
+            },
+            "LastName": {
+              "type": "string"
+            },
+            "Birthday": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "Address": {
+              "type": "string"
+            },
+            "HouseNumber": {
+              "type": "string"
+            },
+            "Addition": {
+              "type": "string"
+            },
+            "ZipCode": {
+              "type": "string"
+            },
+            "City": {
+              "type": "string"
+            },
+            "Country": {
+              "type": "string",
+              "enum": [
+                "Belgie",
+                "Deutschland",
+                "France",
+                "Nederland",
+                "South_Africa",
+                "Swiss",
+                "Singapore",
+                "Hongkong",
+                "Austria",
+                "Sweden",
+                "USA",
+                "Japan",
+                "Kenia",
+                "Noorwegen",
+                "Portugal",
+                "UK",
+                "Curacao",
+                "Macau",
+                "Polen",
+                "Spanje",
+                "Denemarken",
+                "Finland",
+                "Italy",
+                "UAE",
+                "Bonaire"
+              ]
+            },
+            "District": {
+              "type": "string"
+            },
+            "Language": {
+              "type": "string",
+              "enum": [
+                "nl_NL",
+                "en_GB",
+                "pl_PL",
+                "de_DE",
+                "es_ES",
+                "it_IT",
+                "dk_DK"
+              ]
+            },
+            "Email": {
+              "type": "string"
+            },
+            "Phone": {
+              "type": "string"
+            },
+            "PhoneMobile": {
+              "type": "string"
+            },
+            "MembershipExperationWarning": {
+              "type": "string",
+              "enum": [
+                "None",
+                "Low",
+                "Medium",
+                "High",
+                "Critical"
+              ]
+            },
+            "Subscriptions": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "Lessons": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "NumberOfInvoices": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "MultipleCompanies": {
+              "type": "boolean"
+            },
+            "Saldo": {
+              "type": "string"
+            },
+            "SportscreditsBool": {
+              "type": "boolean"
+            },
+            "Sportscredits": {
+              "type": "string"
+            },
+            "AlertMore": {
+              "type": "boolean"
+            },
+            "SamePhoneId": {
+              "type": "boolean"
+            },
+            "PhoneIdSwapRequested": {
+              "type": "boolean"
+            }
+          }
+        },
+        "Photo": {
+          "title": "",
+          "type": "object",
+          "properties": {
+            "HasContents": {
+              "type": "boolean"
+            },
+            "FileID": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "Name": {
+              "type": "string"
+            },
+            "PublicThumbnailPath": {
+              "type": "string"
+            },
+            "PhotoDate": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "createdDate": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        },
+        "CompanyPhotos": {
+          "type": "array",
+          "items": {
+            "title": "CompanyPhoto",
+            "xml": {
+              "name": "CompanyPhoto"
+            },
+            "type": "object",
+            "properties": {
+              "Photo": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "AddonOnOffRequestResponse": {
+      "title": "AddonOnOffRequestResponse",
+      "xml": {
+        "name": "AddonOnOffRequestResponse"
+      },
+      "type": "object",
+      "properties": {
+        "Response": {
+          "type": "string"
+        },
+        "Warning": {
+          "type": "boolean"
+        },
+        "Message": {
+          "type": "string"
+        }
+      }
+    },
+    "AddonOnConfirmation": {
+      "title": "AddonOnConfirmation",
+      "xml": {
+        "name": "AddonOnConfirmation"
+      },
+      "type": "object",
+      "properties": {
+        "Response": {
+          "type": "string"
+        },
+        "Warning": {
+          "type": "boolean"
+        },
+        "Message": {
+          "type": "string"
+        }
+      }
+    },
+    "AddOnResponse": {
+      "title": "AddOnResponse",
+      "xml": {
+        "name": "AddOnResponse"
+      },
+      "type": "object",
+      "properties": {
+        "Response": {
+          "type": "string"
+        },
+        "Warning": {
+          "type": "boolean"
+        },
+        "NumberOfAddOns": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "AddOns": {
+          "type": "array",
+          "items": {
+            "title": "AddOn",
+            "xml": {
+              "name": "AddOn"
+            },
+            "type": "object",
+            "properties": {
+              "Active": {
+                "type": "boolean"
+              },
+              "Description": {
+                "type": "string"
+              },
+              "AddonOn": {
+                "type": "boolean"
+              },
+              "AddonID": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "CompanyLocation": {
+                "type": "string"
+              },
+              "FirstAmount": {
+                "type": "number"
+              },
+              "NormalPriceDecimal": {
+                "type": "number"
+              },
+              "NormalPriceText": {
+                "type": "string"
+              },
+              "MembershipID": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "MembershipName": {
+                "type": "string"
+              },
+              "ExperationDate": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "LikeLessonResponse": {
+      "title": "LikeLessonResponse",
+      "xml": {
+        "name": "LikeLessonResponse"
+      },
+      "type": "object",
+      "properties": {
+        "Response": {
+          "type": "string"
+        },
+        "Succes": {
+          "type": "boolean"
+        }
+      }
+    },
+    "JoinLessonResponse": {
+      "title": "JoinLessonResponse",
+      "xml": {
+        "name": "JoinLessonResponse"
+      },
+      "type": "object",
+      "properties": {
+        "MinimumParticipants": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "MaximumParticipants": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "FixedParticipants": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "LessonStartTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "LessonEndTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "SpotsInt": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "LikedLesson": {
+          "type": "boolean"
+        },
+        "BookingStatus": {
+          "type": "string",
+          "enum": [
+            "Gereserveerd",
+            "Afgemeld_door_klant",
+            "Afgemeld",
+            "Niet_verschenen",
+            "Aangemeld",
+            "Reservering_vast",
+            "Waitinglist"
+          ]
+        },
+        "LessonId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "ThirdPartyId": {
+          "type": "string"
+        },
+        "Warning": {
+          "type": "boolean"
+        },
+        "ExtraInfo": {
+          "type": "string"
+        },
+        "Triage": {
+          "type": "boolean"
+        },
+        "AmountAsString": {
+          "type": "string"
+        },
+        "Activity": {
+          "type": "string"
+        },
+        "Group": {
+          "type": "string"
+        },
+        "Trainer": {
+          "type": "string"
+        },
+        "LocationName": {
+          "type": "string"
+        },
+        "Response": {
+          "type": "string"
+        },
+        "Succes": {
+          "type": "boolean"
+        }
+      }
+    },
+    "LessonResponse": {
+      "title": "LessonResponse",
+      "xml": {
+        "name": "LessonResponse"
+      },
+      "type": "object",
+      "properties": {
+        "Response": {
+          "type": "string"
+        },
+        "LessonIdsLists": {
+          "type": "array",
+          "items": {
+            "title": "LessonIdsList",
+            "xml": {
+              "name": "LessonIdsList"
+            },
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "_id_jsonkey": {
+                "type": "string"
+              },
+              "Description": {
+                "type": "string"
+              },
+              "BookingStatus": {
+                "type": "string",
+                "enum": [
+                  "Gereserveerd",
+                  "Afgemeld_door_klant",
+                  "Afgemeld",
+                  "Niet_verschenen",
+                  "Aangemeld",
+                  "Reservering_vast",
+                  "Waitinglist",
+                  "Geen"
+                ]
+              },
+              "ThirdPartyId": {
+                "type": "string"
+              },
+              "LikedLesson": {
+                "type": "boolean"
+              },
+              "LocationName": {
+                "type": "string"
+              },
+              "SpotsInt": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "MaximumParticipants": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "LessonColor": {
+                "type": "string"
+              },
+              "LessonStartTime": {
+                "type": "string"
+              },
+              "LessonEndTime": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "LessonDefinitions": {
+          "type": "array",
+          "items": {
+            "title": "LessonDefinition",
+            "xml": {
+              "name": "LessonDefinition"
+            },
+            "type": "object",
+            "properties": {
+              "MinimumParticipants": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "MaximumParticipants": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "LessonDayOfWeek": {
+                "type": "string",
+                "enum": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday",
+                  "Sunday"
+                ]
+              },
+              "OnlineBookingRestriction": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "RecurrentType": {
+                "type": "string",
+                "enum": [
+                  "Days",
+                  "Weeks",
+                  "Months",
+                  "Years"
+                ]
+              },
+              "ParentID": {
+                "type": "string"
+              },
+              "Parent": {
+                "type": "string"
+              },
+              "IsRecurrent": {
+                "type": "boolean"
+              },
+              "LocationID": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "Full": {
+                "type": "boolean"
+              },
+              "SpotsInt": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "LessonColor": {
+                "type": "string"
+              },
+              "AdditionalInformation": {
+                "type": "string"
+              },
+              "Description": {
+                "type": "string"
+              },
+              "_id": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "ThirdPartyId": {
+                "type": "string"
+              },
+              "BookingStatus": {
+                "type": "string",
+                "enum": [
+                  "Gereserveerd",
+                  "Afgemeld_door_klant",
+                  "Afgemeld",
+                  "Niet_verschenen",
+                  "Aangemeld",
+                  "Reservering_vast",
+                  "Waitinglist"
+                ]
+              },
+              "LikedLesson": {
+                "type": "boolean"
+              },
+              "LocationName": {
+                "type": "string"
+              },
+              "CanUseWaitingList": {
+                "type": "boolean"
+              },
+              "Group": {
+                "type": "string"
+              },
+              "Activity": {
+                "type": "string"
+              },
+              "Trainer": {
+                "type": "string"
+              },
+              "LessonStartTime": {
+                "type": "string"
+              },
+              "LessonEndTime": {
+                "type": "string"
+              },
+              "UTCStartTime": {
+                "type": "string"
+              },
+              "UTCEndTime": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "LessonByIdResponse": {
+      "title": "LessonByIdResponse",
+      "xml": {
+        "name": "LessonByIdResponse"
+      },
+      "type": "object",
+      "properties": {
+        "MinimumParticipants": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "MaximumParticipants": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "LessonDayOfWeek": {
+          "type": "string",
+          "enum": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ]
+        },
+        "LessonStartTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "LessonEndTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "OnlineBookingRestriction": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "RecurrentType": {
+          "type": "string",
+          "enum": [
+            "Days",
+            "Weeks",
+            "Months",
+            "Years"
+          ]
+        },
+        "ParentID": {
+          "type": "string"
+        },
+        "Parent": {
+          "type": "string"
+        },
+        "IsRecurrent": {
+          "type": "boolean"
+        },
+        "LocationID": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "Full": {
+          "type": "boolean"
+        },
+        "SpotsInt": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "LessonColor": {
+          "type": "string"
+        },
+        "AdditionalInformation": {
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "ThirdPartyId": {
+          "type": "string"
+        },
+        "BookingStatus": {
+          "type": "string",
+          "enum": [
+            "Gereserveerd",
+            "Afgemeld_door_klant",
+            "Afgemeld",
+            "Niet_verschenen",
+            "Aangemeld",
+            "Reservering_vast",
+            "Waitinglist"
+          ]
+        },
+        "LikedLesson": {
+          "type": "boolean"
+        },
+        "LocationName": {
+          "type": "string"
+        },
+        "CanUseWaitingList": {
+          "type": "boolean"
+        },
+        "Group": {
+          "type": "string"
+        },
+        "Activity": {
+          "type": "string"
+        },
+        "Trainer": {
+          "type": "string"
+        },
+        "Response": {
+          "type": "string"
+        },
+        "Location": {
+          "type": "string"
+        },
+        "LessonId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Triage": {
+          "type": "boolean"
+        },
+        "AmountAsString": {
+          "type": "string"
+        },
+        "UTCStartTime": {
+          "type": "string"
+        },
+        "UTCEndTime": {
+          "type": "string"
+        }
+      }
+    },
+    "LessonResponse_2": {
+      "title": "LessonResponse",
+      "xml": {
+        "name": "LessonResponse"
+      },
+      "type": "object",
+      "properties": {
+        "Response": {
+          "type": "string"
+        },
+        "LessonIdsLists": {
+          "type": "array",
+          "items": {
+            "title": "LessonIdsList",
+            "xml": {
+              "name": "LessonIdsList"
+            },
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "_id_jsonkey": {
+                "type": "string"
+              },
+              "Description": {
+                "type": "string"
+              },
+              "BookingStatus": {
+                "type": "string",
+                "enum": [
+                  "Gereserveerd",
+                  "Afgemeld_door_klant",
+                  "Afgemeld",
+                  "Niet_verschenen",
+                  "Aangemeld",
+                  "Reservering_vast",
+                  "Waitinglist",
+                  "Geen"
+                ]
+              },
+              "ThirdPartyId": {
+                "type": "string"
+              },
+              "LikedLesson": {
+                "type": "boolean"
+              },
+              "LocationName": {
+                "type": "string"
+              },
+              "SpotsInt": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "MaximumParticipants": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "LessonColor": {
+                "type": "string"
+              },
+              "LessonStartTime": {
+                "type": "string"
+              },
+              "LessonEndTime": {
+                "type": "string"
+              },
+              "UTCStartTime": {
+                "type": "string"
+              },
+              "UTCEndTime": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "CancellLessonResponse": {
+      "title": "CancellLessonResponse",
+      "xml": {
+        "name": "CancellLessonResponse"
+      },
+      "type": "object",
+      "properties": {
+        "Response": {
+          "type": "string"
+        },
+        "Succes": {
+          "type": "boolean"
+        }
+      }
+    },
+    "SisowResponse": {
+      "title": "SisowResponse",
+      "xml": {
+        "name": "SisowResponse"
+      },
+      "type": "object",
+      "properties": {
+        "Response": {
+          "type": "string"
+        },
+        "Warning": {
+          "type": "boolean"
+        },
+        "Sisow": {
+          "title": "",
+          "type": "object",
+          "properties": {
+            "SisowLink": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "LogoResponse": {
+      "title": "LogoResponse",
+      "xml": {
+        "name": "LogoResponse"
+      },
+      "type": "object",
+      "properties": {
+        "Response": {
+          "type": "string"
+        },
+        "Logos": {
+          "type": "array",
+          "items": {
+            "title": "Logo",
+            "xml": {
+              "name": "Logo"
+            },
+            "type": "object",
+            "properties": {
+              "Base64": {
+                "type": "string"
+              },
+              "Name": {
+                "type": "string"
+              },
+              "LocationId": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "ShowFreeze": {
+                "type": "boolean"
+              },
+              "FreezeDirect": {
+                "type": "boolean"
+              },
+              "ShowCancellation": {
+                "type": "boolean"
+              },
+              "CancellationDirect": {
+                "type": "boolean"
+              },
+              "ShowQrScan": {
+                "type": "boolean"
+              },
+              "ShowNewMembership": {
+                "type": "boolean"
+              },
+              "BackgroundColor": {
+                "type": "string"
+              },
+              "TriageText": {
+                "type": "string"
+              },
+              "Triage": {
+                "type": "boolean"
+              },
+              "ButtonTextColor": {
+                "type": "string"
+              },
+              "ButtonColor": {
+                "type": "string"
+              },
+              "UseBackgroundImage": {
+                "type": "boolean"
+              },
+              "PrimaryColor": {
+                "type": "string"
+              },
+              "PrimaryButtonTextColor": {
+                "type": "string"
+              },
+              "OwnAppButtonColor": {
+                "type": "string"
+              },
+              "FreezeOptions": {
+                "title": "",
+                "type": "object",
+                "properties": {
+                  "ShowFreeze_1week": {
+                    "type": "boolean"
+                  },
+                  "ShowFreeze_2weeks": {
+                    "type": "boolean"
+                  },
+                  "ShowFreeze_3weeks": {
+                    "type": "boolean"
+                  },
+                  "ShowFreeze_4weeks": {
+                    "type": "boolean"
+                  },
+                  "ShowFreeze_OwnPeriod": {
+                    "type": "boolean"
+                  },
+                  "ShowFreeze_1Month": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "ShowVoucher": {
+                "type": "boolean"
+              },
+              "Currency": {
+                "type": "string"
+              },
+              "UseSportCredit": {
+                "type": "boolean"
+              },
+              "SliderColorOn": {
+                "type": "string"
+              },
+              "SliderColorOff": {
+                "type": "string"
+              },
+              "ShowDuoVisits": {
+                "type": "boolean"
+              },
+              "DuoVisitsText": {
+                "type": "string"
+              },
+              "ShowButtonReservation": {
+                "type": "boolean"
+              },
+              "ShowButtonQR": {
+                "type": "boolean"
+              },
+              "ShowUpgrade": {
+                "type": "boolean"
+              },
+              "GDPRtext": {
+                "type": "string"
+              },
+              "UseTile": {
+                "type": "boolean"
+              },
+              "UseCoolingOff": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    },
+    "LocationResponse": {
+      "title": "LocationResponse",
+      "xml": {
+        "name": "LocationResponse"
+      },
+      "type": "object",
+      "properties": {
+        "Response": {
+          "type": "string"
+        },
+        "Locationss": {
+          "type": "array",
+          "items": {
+            "title": "Locations",
+            "xml": {
+              "name": "Locations"
+            },
+            "type": "object",
+            "properties": {
+              "LocationId": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "NameLocation": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "InvoiceResponse": {
+      "title": "InvoiceResponse",
+      "xml": {
+        "name": "InvoiceResponse"
+      },
+      "type": "object",
+      "properties": {
+        "Response": {
+          "type": "string"
+        },
+        "Warning": {
+          "type": "boolean"
+        },
+        "Invoices": {
+          "type": "array",
+          "items": {
+            "title": "Invoice",
+            "xml": {
+              "name": "Invoice"
+            },
+            "type": "object",
+            "properties": {
+              "InvoiceNumber": {
+                "type": "string"
+              },
+              "InvoiceAmount": {
+                "type": "number"
+              },
+              "InvoiceStatus": {
+                "type": "string"
+              },
+              "InvoiceID": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "CompanyLocationInvoice": {
+                "type": "string"
+              },
+              "InvoiceDate": {
+                "type": "string"
+              },
+              "AmountAsString": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "InvoicePDFResponse": {
+      "title": "InvoicePDFResponse",
+      "xml": {
+        "name": "InvoicePDFResponse"
+      },
+      "type": "object",
+      "properties": {
+        "Response": {
+          "type": "string"
+        },
+        "PDFString": {
+          "type": "string"
+        }
+      }
+    },
+    "CreditOptionsResponse": {
+      "title": "CreditOptionsResponse",
+      "xml": {
+        "name": "CreditOptionsResponse"
+      },
+      "type": "object",
+      "properties": {
+        "Response": {
+          "type": "string"
+        },
+        "CreditOptions": {
+          "type": "array",
+          "items": {
+            "title": "CreditOptions",
+            "xml": {
+              "name": "CreditOptions"
+            },
+            "type": "object",
+            "properties": {
+              "Amount": {
+                "type": "string"
+              },
+              "Info": {
+                "type": "string"
+              },
+              "OriginalAmount": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+    },
+    "EmailResponse": {
+      "title": "EmailResponse",
+      "xml": {
+        "name": "EmailResponse"
+      },
+      "type": "object",
+      "properties": {
+        "Response": {
+          "type": "string"
+        },
+        "Warning": {
+          "type": "boolean"
+        }
+      }
+    },
+    "AppResponse_2_3_4": {
+      "title": "Response",
+      "xml": {
+        "name": "Response"
+      },
+      "type": "object",
+      "properties": {
+        "Response": {
+          "type": "string"
+        },
+        "CancellationReasons": {
+          "type": "array",
+          "items": {
+            "title": "CancellationReason",
+            "xml": {
+              "name": "CancellationReason"
+            },
+            "type": "object",
+            "properties": {
+              "Description": {
+                "type": "string"
+              },
+              "TerminationId": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          }
+        }
+      }
+    },
+    "FPResponse": {
+      "title": "FPResponse",
+      "xml": {
+        "name": "FPResponse"
+      },
+      "type": "object",
+      "properties": {
+        "Succes": {
+          "type": "boolean"
+        },
+        "State": {
+          "type": "string"
+        }
+      }
+    },
+    "LoginResponse": {
+      "title": "LoginResponse",
+      "xml": {
+        "name": "LoginResponse"
+      },
+      "type": "object",
+      "properties": {
+        "Token": {
+          "type": "string"
+        },
+        "HttpStatusCode": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Message": {
+          "type": "string"
+        }
+      }
+    },
+    "HTML": {
+      "title": "HTMLResponse",
+      "xml": {
+        "name": "HTMLResponse"
+      },
+      "type": "object",
+      "properties": {
+        "HTML": {
+          "type": "string"
+        },
+        "Response": {
+          "type": "string"
+        }
+      }
+    },
+    "AppResponse_2_3_4_5": {
+      "title": "Response",
+      "xml": {
+        "name": "Response"
+      },
+      "type": "object",
+      "properties": {
+        "Response": {
+          "type": "string"
+        },
+        "MembershipDefinitions": {
+          "type": "array",
+          "items": {
+            "title": "MembershipDefinition",
+            "xml": {
+              "name": "MembershipDefinition"
+            },
+            "type": "object",
+            "properties": {
+              "MembershipDefinitionId": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "AmountString": {
+                "type": "string"
+              },
+              "IsAction": {
+                "type": "boolean"
+              },
+              "Description": {
+                "type": "string"
+              },
+              "ActionInfo": {
+                "type": "string"
+              },
+              "PaymentMethodString": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "FirstCostsResponse": {
+      "title": "FirstCostsResponse",
+      "xml": {
+        "name": "FirstCostsResponse"
+      },
+      "type": "object",
+      "properties": {
+        "FirstCostAmount": {
+          "type": "number"
+        },
+        "FirstCostString": {
+          "type": "string"
+        },
+        "TotalAmountString": {
+          "type": "string"
+        },
+        "TotalAmount": {
+          "type": "number"
+        },
+        "Response": {
+          "type": "string"
+        },
+        "Deposits": {
+          "type": "array",
+          "items": {
+            "title": "Deposit",
+            "xml": {
+              "name": "Deposit"
+            },
+            "type": "object",
+            "properties": {
+              "Description": {
+                "type": "string"
+              },
+              "AmountString": {
+                "type": "string"
+              },
+              "Amount": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "FirstCostsAmountString": {
+          "type": "string"
+        }
+      }
+    },
+    "AddOnResponse_2": {
+      "title": "AddOnResponse",
+      "xml": {
+        "name": "AddOnResponse"
+      },
+      "type": "object",
+      "properties": {
+        "Response": {
+          "type": "string"
+        },
+        "AddOns": {
+          "type": "array",
+          "items": {
+            "title": "AddOn",
+            "xml": {
+              "name": "AddOn"
+            },
+            "type": "object",
+            "properties": {
+              "Description": {
+                "type": "string"
+              },
+              "AddonID": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "FirstAmount": {
+                "type": "number"
+              },
+              "NormalPriceDecimal": {
+                "type": "number"
+              },
+              "NormalPriceText": {
+                "type": "string"
+              },
+              "FirstAmountString": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "ConditionsResponse": {
+      "title": "ConditionsResponse",
+      "xml": {
+        "name": "ConditionsResponse"
+      },
+      "type": "object",
+      "properties": {
+        "Response": {
+          "type": "string"
+        },
+        "IBANMandatory": {
+          "type": "boolean"
+        },
+        "IBAN": {
+          "type": "string"
+        },
+        "BIC": {
+          "type": "string"
+        },
+        "Conditions": {
+          "type": "array",
+          "items": {
+            "title": "Condition",
+            "xml": {
+              "name": "Condition"
+            },
+            "type": "object",
+            "properties": {
+              "HasBase64": {
+                "type": "boolean"
+              },
+              "ConditionType": {
+                "type": "string"
+              },
+              "Text": {
+                "type": "string"
+              },
+              "Mandatory": {
+                "type": "boolean"
+              },
+              "LinkText": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "ConditionsResponse_2": {
+      "title": "ConditionsResponse",
+      "xml": {
+        "name": "ConditionsResponse"
+      },
+      "type": "object",
+      "properties": {
+        "Response": {
+          "type": "string"
+        },
+        "Base64": {
+          "type": "string"
+        }
+      }
+    },
+    "ConditionsResponse_2_3": {
+      "title": "ConditionsResponse",
+      "xml": {
+        "name": "ConditionsResponse"
+      },
+      "type": "object",
+      "properties": {
+        "Response": {
+          "type": "string"
+        },
+        "IBAN": {
+          "type": "string"
+        },
+        "BIC": {
+          "type": "string"
+        }
+      }
+    },
+    "AppResponse_2_3_4_5_6": {
+      "title": "Response",
+      "xml": {
+        "name": "Response"
+      },
+      "type": "object",
+      "properties": {
+        "Response": {
+          "type": "string"
+        }
+      }
+    },
+    "NewsResponse": {
+      "title": "NewsResponse",
+      "xml": {
+        "name": "NewsResponse"
+      },
+      "type": "object",
+      "properties": {
+        "Response": {
+          "type": "string"
+        },
+        "Newss": {
+          "type": "array",
+          "items": {
+            "title": "News",
+            "xml": {
+              "name": "News"
+            },
+            "type": "object",
+            "properties": {
+              "Title": {
+                "type": "string"
+              },
+              "Description": {
+                "type": "string"
+              },
+              "HTML": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          }
+        }
+      }
+    },
+    "OptInResponse": {
+      "title": "OptInResponse",
+      "xml": {
+        "name": "OptInResponse"
+      },
+      "type": "object",
+      "properties": {
+        "Response": {
+          "type": "string"
+        },
+        "OptIn": {
+          "type": "boolean"
+        }
+      }
+    },
+    "TogetherEntranceApp": {
+      "title": "TogetherEntranceApp",
+      "xml": {
+        "name": "TogetherEntranceApp"
+      },
+      "type": "object",
+      "properties": {
+        "Response": {
+          "type": "string"
+        },
+        "Succes": {
+          "type": "boolean"
+        },
+        "TogetherEntranceID": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "TogetherEntranceResponse": {
+      "title": "TogetherEntranceResponse",
+      "xml": {
+        "name": "TogetherEntranceResponse"
+      },
+      "type": "object",
+      "properties": {
+        "Response": {
+          "type": "string"
+        },
+        "Warning": {
+          "type": "boolean"
+        },
+        "TogetherEntranceApps": {
+          "type": "array",
+          "items": {
+            "title": "TogetherEntranceApp",
+            "xml": {
+              "name": "TogetherEntranceApp"
+            },
+            "type": "object",
+            "properties": {
+              "FullnameGuest": {
+                "type": "string"
+              },
+              "EmailGuest": {
+                "type": "string"
+              },
+              "MobilePhoneGuest": {
+                "type": "string"
+              },
+              "DateVisitGuest": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "Used": {
+                "type": "boolean"
+              },
+              "TogetherEntranceID": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          }
+        }
+      }
+    },
+    "ButtonsResponse": {
+      "title": "ButtonsResponse",
+      "xml": {
+        "name": "ButtonsResponse"
+      },
+      "type": "object",
+      "properties": {
+        "Response": {
+          "type": "string"
+        },
+        "Buttons": {
+          "type": "array",
+          "items": {
+            "title": "Button",
+            "xml": {
+              "name": "Button"
+            },
+            "type": "object",
+            "properties": {
+              "AreaAllowed": {
+                "type": "boolean"
+              },
+              "PictureUrl": {
+                "type": "string"
+              },
+              "WebPageLink": {
+                "type": "string"
+              },
+              "WebpageInApp": {
+                "type": "boolean"
+              },
+              "ScanQr": {
+                "type": "boolean"
+              },
+              "IOSStoreUrl": {
+                "type": "string"
+              },
+              "IOSAppUrl": {
+                "type": "string"
+              },
+              "AndroidStoreUrl": {
+                "type": "string"
+              },
+              "AndroidAppUrl": {
+                "type": "string"
+              },
+              "ButtonText": {
+                "type": "string"
+              },
+              "NoAccesText": {
+                "type": "string"
+              },
+              "InfoText": {
+                "type": "string"
+              },
+              "SSOBase64": {
+                "type": "string"
+              },
+              "SortOrder": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "ShowSecondPage": {
+                "type": "boolean"
+              },
+              "NoAccessButtonText": {
+                "type": "string"
+              },
+              "StackKey": {
+                "type": "string",
+                "enum": [
+                  "DashboardStack",
+                  "ScannerStack",
+                  "ReservationStack",
+                  "MembershipStack",
+                  "MoreStack"
+                ]
+              },
+              "ScreenKey": {
+                "type": "string"
+              },
+              "ArgumentenJson": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "QRData": {
+      "title": "QRData",
+      "xml": {
+        "name": "QRData"
+      },
+      "type": "object",
+      "properties": {
+        "QRCode": {
+          "type": "string"
+        },
+        "PhoneID": {
+          "type": "string"
+        },
+        "LocationId": {
+          "type": "string"
+        }
+      }
+    },
+    "AppRequest": {
+      "title": "Request",
+      "xml": {
+        "name": "Request"
+      },
+      "type": "object",
+      "properties": {
+        "HouseNumber": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Addition": {
+          "type": "string"
+        },
+        "ZipCode": {
+          "type": "string"
+        },
+        "Phone": {
+          "type": "string"
+        },
+        "PhoneMobile": {
+          "type": "string"
+        },
+        "City": {
+          "type": "string"
+        },
+        "Address": {
+          "type": "string"
+        }
+      }
+    },
+    "LanguageRequest": {
+      "title": "LanguageRequest",
+      "xml": {
+        "name": "LanguageRequest"
+      },
+      "type": "object",
+      "properties": {
+        "LocationId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Language": {
+          "type": "string",
+          "enum": [
+            "nl_NL",
+            "en_GB",
+            "pl_PL",
+            "de_DE",
+            "es_ES",
+            "it_IT",
+            "dk_DK"
+          ]
+        }
+      }
+    },
+    "AppRequest_2": {
+      "title": "Request",
+      "xml": {
+        "name": "Request"
+      },
+      "type": "object",
+      "properties": {
+        "AddonID": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "AddOnTurnOn": {
+          "type": "boolean"
+        }
+      }
+    },
+    "PhoneIdRequest": {
+      "title": "PhoneIdRequest",
+      "xml": {
+        "name": "PhoneIdRequest"
+      },
+      "type": "object",
+      "properties": {
+        "PhoneID": {
+          "type": "string"
+        },
+        "LocationId": {
+          "type": "string"
+        }
+      }
+    },
+    "RequestLikeLesson": {
+      "title": "RequestLikeLesson",
+      "xml": {
+        "name": "RequestLikeLesson"
+      },
+      "type": "object",
+      "properties": {
+        "LessonId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "LikeBool": {
+          "type": "boolean"
+        },
+        "LocationId": {
+          "type": "string"
+        }
+      }
+    },
+    "JoinLessonRequest": {
+      "title": "RequestJoinLesson",
+      "xml": {
+        "name": "RequestJoinLesson"
+      },
+      "type": "object",
+      "properties": {
+        "LessonId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "LocationId": {
+          "type": "string"
+        }
+      }
+    },
+    "AppRequest_2_3": {
+      "title": "Request",
+      "xml": {
+        "name": "Request"
+      },
+      "type": "object",
+      "properties": {
+        "IsCallNaar2eOmgeving": {
+          "type": "boolean"
+        },
+        "Flavour": {
+          "type": "string"
+        }
+      }
+    },
+    "AppRequest_2_3_4": {
+      "title": "Request",
+      "xml": {
+        "name": "Request"
+      },
+      "type": "object",
+      "properties": {
+        "MembershipID": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "Reason": {
+          "type": "string"
+        },
+        "StartDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "FreezeTillDate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "AppRequest_2_3_4_5": {
+      "title": "Request",
+      "xml": {
+        "name": "Request"
+      },
+      "type": "object",
+      "properties": {
+        "MembershipID": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "StartDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "TerminationId": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "FPUser": {
+      "title": "FPUser",
+      "xml": {
+        "name": "FPUser"
+      },
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string"
+        }
+      }
+    },
+    "AppRequest_2_3_4_5_6": {
+      "title": "Request",
+      "xml": {
+        "name": "Request"
+      },
+      "type": "object",
+      "properties": {
+        "User": {
+          "type": "string"
+        },
+        "Password": {
+          "type": "string"
+        },
+        "IsCallNaar2eOmgeving": {
+          "type": "boolean"
+        }
+      }
+    },
+    "NewMembershipRequest": {
+      "title": "NewMembershipRequest",
+      "xml": {
+        "name": "NewMembershipRequest"
+      },
+      "type": "object",
+      "properties": {
+        "Signature": {
+          "type": "string"
+        },
+        "MembershipDefinitionId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "StartDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "IsAction": {
+          "type": "boolean"
+        },
+        "AddonVoucher": {
+          "type": "string"
+        },
+        "LocationId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "AddOns": {
+          "type": "array",
+          "items": {
+            "title": "AddOn",
+            "xml": {
+              "name": "AddOn"
+            },
+            "type": "object",
+            "properties": {
+              "AddonID": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          }
+        },
+        "IBAN": {
+          "type": "string"
+        },
+        "BIC": {
+          "type": "string"
+        },
+        "MembershipId": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "OptinRequest": {
+      "title": "OptinRequest",
+      "xml": {
+        "name": "OptinRequest"
+      },
+      "type": "object",
+      "properties": {
+        "OptIn": {
+          "type": "boolean"
+        },
+        "LocationId": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "TogetherEntranceApp_2": {
+      "title": "TogetherEntranceApp",
+      "xml": {
+        "name": "TogetherEntranceApp"
+      },
+      "type": "object",
+      "properties": {
+        "FullnameGuest": {
+          "type": "string"
+        },
+        "EmailGuest": {
+          "type": "string"
+        },
+        "MobilePhoneGuest": {
+          "type": "string"
+        },
+        "DateVisitGuest": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "LocationId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Delete": {
+          "type": "boolean"
+        },
+        "TogetherEntranceID": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "AccessQR",
+      "description": ""
+    },
+    {
+      "name": "RegisterQR",
+      "description": ""
+    },
+    {
+      "name": "UserContent",
+      "description": ""
+    },
+    {
+      "name": "AddOn",
+      "description": ""
+    },
+    {
+      "name": "PhoneId",
+      "description": ""
+    },
+    {
+      "name": "Lesson",
+      "description": ""
+    },
+    {
+      "name": "Payment",
+      "description": ""
+    },
+    {
+      "name": "Location",
+      "description": ""
+    },
+    {
+      "name": "Invoices",
+      "description": ""
+    },
+    {
+      "name": "Credits",
+      "description": ""
+    },
+    {
+      "name": "ChangeMembership",
+      "description": ""
+    },
+    {
+      "name": "ForgotPassword",
+      "description": ""
+    },
+    {
+      "name": "Login",
+      "description": ""
+    },
+    {
+      "name": "HTML",
+      "description": ""
+    },
+    {
+      "name": "MembershipDefinition",
+      "description": ""
+    },
+    {
+      "name": "News",
+      "description": ""
+    },
+    {
+      "name": "OptIn",
+      "description": ""
+    },
+    {
+      "name": "TogetherEntrance",
+      "description": ""
+    },
+    {
+      "name": "Button",
+      "description": ""
+    }
+  ]
+}
